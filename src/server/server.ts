@@ -1,3 +1,4 @@
+import type { Request, Response } from "express";
 import * as express from "express";
 import { createHydrationRoute } from "./hydration";
 import * as fs from "fs";
