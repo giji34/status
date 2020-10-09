@@ -14,8 +14,12 @@ const settings: Settings = JSON.parse(
 
 const app = express();
 app.use(express.static("public"));
+app.get("/health_check", (req: Request, res: Response) => {
+  res.status(200);
+  res.json({ status: "ok" });
+});
 app.use(createHydrationRoute(settings));
-app.get("/health_check", (req, res, next) => {});
+
 app.listen(port, () => {
   console.log(`started at port ${port}`);
 });
