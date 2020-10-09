@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2015",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "jsx": "react",
+    "strictNullChecks": true,
+    "lib": ["dom", "esnext" ]
+  }
+}
