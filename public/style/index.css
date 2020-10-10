@@ -58,6 +58,7 @@ h2 {
 .status-container {
   border-radius: 5px;
   border: 1px solid #e0e0e0;
+  margin-bottom: 50px;
 }
 
 .status-container .item {
