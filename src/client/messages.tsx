@@ -32,6 +32,7 @@ export const HowToLoginMessage: FC = ({}) => {
             Minecraft Java Edition
             でログインして下さい。バージョンは最新のものをお勧めしますが、古いバージョンでもログインは可能です。
           </li>
+          <li>サーバーのアドレスは public.giji34.world です。</li>
           <li>
             サーバーはホワイトリスト制となっています。お手数ですがログイン前に、管理者{" "}
             <a href="https://twitter.com/kbinani">@kbinani</a> 宛に Minecraft
