@@ -5,7 +5,6 @@ import * as path from "path";
 import { Settings } from "../share/types";
 import { StatusMonitor } from "./status-monitor";
 import { createHydrationRoute } from "./hydration";
-import helmet = require("helmet");
 
 const port = 8090;
 
@@ -21,7 +20,6 @@ const monitor = new StatusMonitor({
 monitor.start();
 
 const app = express();
-app.use(helmet());
 app.use(express.static("public"));
 app.get("/health_check", (req: Request, res: Response) => {
   res.status(200);
