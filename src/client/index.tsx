@@ -1,8 +1,9 @@
 import * as React from "react";
 import { FC } from "react";
 import { Main } from "./main";
+import { ServerStatus } from "../share/types";
 
-export const IndexView: FC<{ servers: string[] }> = ({ servers }) => {
+export const IndexView: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
   return (
     <html>
       <head>
@@ -11,7 +12,7 @@ export const IndexView: FC<{ servers: string[] }> = ({ servers }) => {
         <link rel="stylesheet" href={"/style/index.css"} />
       </head>
       <body>
-        <Main servers={servers} />
+        <Main statuses={statuses} />
         <script src={"/js/index.js"} defer />
       </body>
     </html>

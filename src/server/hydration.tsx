@@ -3,16 +3,12 @@ import type { Errback, Response } from "express";
 import * as express from "express";
 import { renderToNodeStream } from "react-dom/server";
 import { IndexView } from "../client";
-import { Settings } from "../share/types";
+import { StatusMonitor } from "./status-monitor";
 
-export function createHydrationRoute(settings: Settings): express.Route {
+export function createHydrationRoute(monitor: StatusMonitor): express.Route {
   const router = express.Router();
   router.get("/", (req, res, next) => {
-    renderTo(
-      <IndexView servers={settings.servers.map((s) => s.name)} />,
-      res,
-      next
-    );
+    renderTo(<IndexView statuses={monitor.current} />, res, next);
   });
   return router;
 }

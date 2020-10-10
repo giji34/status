@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
-import { ServerStatus, Status } from "../share/types";
+import { ServerStatus } from "../share/types";
 import { CaveatMessage } from "./caveat-message";
 import { StatusContainer } from "./status-container";
 import { useDidMount, usePatchReducer } from "../share/hooks";
@@ -9,10 +9,8 @@ type State = {
   statuses: ServerStatus[];
 };
 
-export const Main: FC<{ servers: string[] }> = ({ servers }) => {
-  const [state, setState] = usePatchReducer<State>({
-    statuses: servers.map((s) => ({ server: s, status: Status.UNKNOWN })),
-  });
+export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
+  const [state, setState] = usePatchReducer<State>({ statuses });
   const fetchStatus = () => {
     //TODO:
   };
