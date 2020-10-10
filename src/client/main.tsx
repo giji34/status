@@ -1,7 +1,11 @@
 import * as React from "react";
 import { FC } from "react";
 import { ServerStatus } from "../share/types";
-import { CaveatMessage } from "./caveat-message";
+import {
+  CaveatMessage,
+  HowToLoginMessage,
+  InstructionMessage,
+} from "./messages";
 import { StatusContainer } from "./status-container";
 import { useDidMount, usePatchReducer } from "../share/hooks";
 import { kTitle } from "../server/index-view";
@@ -33,6 +37,8 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
       </div>
       <div className="main center">
         <CaveatMessage />
+        <HowToLoginMessage />
+        <InstructionMessage />
         <StatusContainer statuses={state.statuses} />
       </div>
     </>
