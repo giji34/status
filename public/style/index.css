@@ -22,7 +22,6 @@ body {
 
 .main {
   max-width: 1024px;
-  min-height: calc(100vh - 77px);
   padding-right: 15px;
   padding-left: 15px;
 }
