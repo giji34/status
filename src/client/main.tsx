@@ -17,7 +17,8 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
     setState({ statuses: json.servers });
   };
   useDidMount(() => {
-    const id = window.setInterval(fetchStatus, 5000);
+    const msecPerMinutes = 60 * 1000;
+    const id = window.setInterval(fetchStatus, 5 * msecPerMinutes);
     return () => {
       window.clearInterval(id);
     };
