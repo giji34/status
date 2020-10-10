@@ -4,7 +4,6 @@ import { ServerStatus } from "../share/types";
 import { CaveatMessage } from "./caveat-message";
 import { StatusContainer } from "./status-container";
 import { useDidMount, usePatchReducer } from "../share/hooks";
-import { kTitle } from "./index";
 
 type State = {
   statuses: ServerStatus[];
@@ -12,11 +11,13 @@ type State = {
 
 export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
   const [state, setState] = usePatchReducer<State>({ statuses });
-  const fetchStatus = () => {
-    //TODO:
+  const fetchStatus = async () => {
+    const res = await fetch("/status", { method: "GET" });
+    const json: { servers: ServerStatus[] } = await res.json();
+    setState({ statuses: json.servers });
   };
   useDidMount(() => {
-    const id = window.setInterval(fetchStatus, 10000);
+    const id = window.setInterval(fetchStatus, 5000);
     return () => {
       window.clearInterval(id);
     };
@@ -25,7 +26,7 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
     <>
       <div className="navbar">
         <div className="navbar-header center">
-          <div className="title">{kTitle}</div>
+          <div className="title">にじ鯖・ホロ鯖再現ワールド観光案内</div>
         </div>
       </div>
       <div className="main center">

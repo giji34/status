@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import * as express from "express";
-import { createHydrationRoute } from "./hydration";
 import * as fs from "fs";
 import * as path from "path";
 import { Settings } from "../share/types";
@@ -25,7 +24,10 @@ app.get("/health_check", (req: Request, res: Response) => {
   res.status(200);
   res.json({ status: "ok" });
 });
-app.use(createHydrationRoute(monitor));
+app.get("/status", (req: Request, res: Response) => {
+  res.status(200);
+  res.json({ servers: monitor.current });
+});
 
 app.listen(port, () => {
   console.log(`started at port ${port}`);

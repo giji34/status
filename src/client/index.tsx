@@ -1,22 +1,9 @@
-import * as React from "react";
-import { FC } from "react";
+import { render } from "react-dom";
 import { Main } from "./main";
-import { ServerStatus } from "../share/types";
+import * as React from "react";
 
-export const kTitle = "にじ鯖・ホロ鯖再現ワールド観光案内";
-
-export const IndexView: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
-  return (
-    <html>
-      <head>
-        <meta charSet="utf-8" />
-        <title>{kTitle}</title>
-        <link rel="stylesheet" href={"/style/index.css"} />
-      </head>
-      <body>
-        <Main statuses={statuses} />
-        <script src={"/js/index.js"} defer />
-      </body>
-    </html>
-  );
-};
+document.addEventListener("DOMContentLoaded", () => {
+  //TODO: ここで statuses をデコードする.
+  const main = document.getElementById("main");
+  render(<Main statuses={[]} />, main);
+});
