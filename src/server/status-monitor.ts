@@ -30,28 +30,38 @@ export class StatusMonitor {
     return [...this._current];
   }
 
+  private updateStatus(name: string, status: Status) {
+    const idx = this._current.findIndex((v) => v.server === name);
+    if (idx < 0) {
+      return;
+    }
+    this._current[idx].status = status;
+  }
+
   private readonly update = () => {
     for (const server of this.servers) {
       const { address, queryPort, name } = server;
       const query = new Query(address, queryPort, { timeout: 3000 });
-      const updateStatus = (status: Status) => {
-        return () => {
-          const idx = this._current.findIndex((v) => v.server === name);
-          this._current[idx].status = status;
-        };
+      const onSuccess = () => {
+        this.updateStatus(name, Status.UP);
+        query.close();
+      };
+      const onError = () => {
+        this.updateStatus(name, Status.DOWN);
+        query.close();
       };
       query
         .connect()
         .then(() => {
           query.basic_stat((err, stat: BasicStat) => {
             if (err) {
-              updateStatus(Status.DOWN)();
+              onError();
             } else {
-              updateStatus(Status.UP)();
+              onSuccess();
             }
           });
         })
-        .catch(updateStatus(Status.DOWN));
+        .catch(onError);
     }
   };
 }
