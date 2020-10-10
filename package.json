@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fmt": "prettier --write 'src/**/*.ts' 'src/**/*.tsx' 'public/style/*.css'"
+    "fmt": "prettier --write 'src/**/*.ts' 'src/**/*.tsx' 'public/style/*.css'",
+    "dev": "ts-node src/server/server.ts"
   },
   "author": "kbinani <kbinani.bt@gmail.com>",
   "license": "MIT",
