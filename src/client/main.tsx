@@ -4,6 +4,7 @@ import { ServerStatus } from "../share/types";
 import { CaveatMessage } from "./caveat-message";
 import { StatusContainer } from "./status-container";
 import { useDidMount, usePatchReducer } from "../share/hooks";
+import { kTitle } from "../server/index-view";
 
 type State = {
   statuses: ServerStatus[];
@@ -27,7 +28,7 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
     <>
       <div className="navbar">
         <div className="navbar-header center">
-          <div className="title">にじ鯖・ホロ鯖再現ワールド観光案内</div>
+          <div className="title">{kTitle}</div>
         </div>
       </div>
       <div className="main center">

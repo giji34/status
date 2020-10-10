@@ -4,6 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { Settings } from "../share/types";
 import { StatusMonitor } from "./status-monitor";
+import { createHydrationRoute } from "./hydration";
 
 const port = 8090;
 
@@ -28,6 +29,7 @@ app.get("/status", (req: Request, res: Response) => {
   res.status(200);
   res.json({ servers: monitor.current });
 });
+app.use(createHydrationRoute(monitor));
 
 app.listen(port, () => {
   console.log(`started at port ${port}`);
