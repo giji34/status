@@ -4,6 +4,7 @@ import { ServerStatus } from "../share/types";
 import { CaveatMessage } from "./caveat-message";
 import { StatusContainer } from "./status-container";
 import { useDidMount, usePatchReducer } from "../share/hooks";
+import { kTitle } from "./index";
 
 type State = {
   statuses: ServerStatus[];
@@ -22,7 +23,11 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
   });
   return (
     <>
-      <div className="navbar" />
+      <div className="navbar">
+        <div className="navbar-header center">
+          <div className="title">{kTitle}</div>
+        </div>
+      </div>
       <div className="main center">
         <CaveatMessage />
         <StatusContainer statuses={state.statuses} />

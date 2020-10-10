@@ -20,6 +20,17 @@ body {
   height: 77px;
 }
 
+.navbar-header {
+  max-width: 1024px;
+  padding: 24px 15px;
+}
+
+.navbar-header .title {
+  font-size: 30px;
+  color: #ddd;
+  font-weight: bold;
+}
+
 .main {
   max-width: 1024px;
   padding-right: 15px;
