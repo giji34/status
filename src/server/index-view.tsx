@@ -13,6 +13,7 @@ export const IndexView: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
       <head>
         <meta charSet="utf-8" />
         <title>{kTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href={"/style/index.css"} />
         <script id="init" data-json={data}></script>
       </head>
