@@ -1,5 +1,6 @@
 import { Server, ServerStatus, Status } from "../share/types";
 import * as Query from "mcquery";
+import mcpeping = require("mcpe-ping");
 
 export class StatusMonitor {
   private readonly servers: Server[];
@@ -40,28 +41,38 @@ export class StatusMonitor {
 
   private readonly update = () => {
     for (const server of this.servers) {
-      const { address, queryPort, name } = server;
-      const query = new Query(address, queryPort, { timeout: 3000 });
-      const onSuccess = () => {
-        this.updateStatus(name, Status.UP);
-        query.close();
-      };
-      const onError = () => {
-        this.updateStatus(name, Status.DOWN);
-        query.close();
-      };
-      query
-        .connect()
-        .then(() => {
-          query.basic_stat((err, stat: BasicStat) => {
-            if (err) {
-              onError();
-            } else {
-              onSuccess();
-            }
-          });
-        })
-        .catch(onError);
+      const { address, queryPort, name, bedrock } = server;
+      if (bedrock) {
+        mcpeping(address, queryPort, (err, res) => {
+          if (err) {
+            this.updateStatus(name, Status.DOWN);
+          } else {
+            this.updateStatus(name, Status.UP);
+          }
+        });
+      } else {
+        const query = new Query(address, queryPort, { timeout: 3000 });
+        const onSuccess = () => {
+          this.updateStatus(name, Status.UP);
+          query.close();
+        };
+        const onError = () => {
+          this.updateStatus(name, Status.DOWN);
+          query.close();
+        };
+        query
+          .connect()
+          .then(() => {
+            query.basic_stat((err, stat: BasicStat) => {
+              if (err) {
+                onError();
+              } else {
+                onSuccess();
+              }
+            });
+          })
+          .catch(onError);
+      }
     }
   };
 }
