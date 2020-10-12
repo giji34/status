@@ -32,8 +32,10 @@ export class StatusMonitor {
     return [...this._current];
   }
 
-  private updateStatus(name: string, status: Status) {
-    const idx = this._current.findIndex((v) => v.server === name);
+  private updateStatus(name: string, bedrock: boolean, status: Status) {
+    const idx = this._current.findIndex(
+      (v) => v.server === name && v.bedrock === bedrock
+    );
     if (idx < 0) {
       return;
     }
@@ -46,19 +48,19 @@ export class StatusMonitor {
       if (bedrock) {
         mcpeping(address, queryPort, (err, res) => {
           if (err) {
-            this.updateStatus(name, Status.DOWN);
+            this.updateStatus(name, bedrock, Status.DOWN);
           } else {
-            this.updateStatus(name, Status.UP);
+            this.updateStatus(name, bedrock, Status.UP);
           }
         });
       } else {
         const query = new Query(address, queryPort, { timeout: 3000 });
         const onSuccess = () => {
-          this.updateStatus(name, Status.UP);
+          this.updateStatus(name, !!bedrock, Status.UP);
           query.close();
         };
         const onError = () => {
-          this.updateStatus(name, Status.DOWN);
+          this.updateStatus(name, !!bedrock, Status.DOWN);
           query.close();
         };
         query
