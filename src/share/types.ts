@@ -18,4 +18,5 @@ export enum Status {
 export type ServerStatus = {
   server: string;
   status: Status;
+  bedrock: boolean;
 };

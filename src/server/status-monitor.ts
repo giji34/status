@@ -14,6 +14,7 @@ export class StatusMonitor {
     this._current = servers.map((server) => ({
       server: server.name,
       status: Status.UNKNOWN,
+      bedrock: server.bedrock === true,
     }));
     this.interval = interval;
   }

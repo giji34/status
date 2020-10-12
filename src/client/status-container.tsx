@@ -3,12 +3,13 @@ import { FC } from "react";
 import { ServerStatus, Status } from "../share/types";
 import classNames from "classnames";
 
-export const StatusContainer: FC<{ statuses: ServerStatus[] }> = ({
-  statuses,
-}) => {
+export const StatusContainer: FC<{
+  title: string;
+  statuses: ServerStatus[];
+}> = ({ title, statuses }) => {
   return (
     <>
-      <h2>サーバー稼働状況</h2>
+      <h2>{title}</h2>
       <div className="status-container">
         {statuses.map(({ server, status }, i) => (
           <StatusItem server={server} status={status} key={i} />

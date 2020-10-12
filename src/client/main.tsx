@@ -28,6 +28,8 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
       window.clearInterval(id);
     };
   });
+  const jeServers = state.statuses.filter((s) => !s.bedrock);
+  const beServers = state.statuses.filter((s) => s.bedrock);
   return (
     <>
       <div className="navbar">
@@ -39,7 +41,18 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
         <CaveatMessage />
         <HowToLoginMessage />
         <InstructionMessage />
-        <StatusContainer statuses={state.statuses} />
+        {jeServers.length > 0 && (
+          <StatusContainer
+            title={"Java 版サーバー稼働状況"}
+            statuses={jeServers}
+          />
+        )}
+        {beServers.length > 0 && (
+          <StatusContainer
+            title={"統合版サーバー稼働状況"}
+            statuses={beServers}
+          />
+        )}
       </div>
     </>
   );
