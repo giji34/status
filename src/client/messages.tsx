@@ -29,14 +29,28 @@ export const HowToLoginMessage: FC = ({}) => {
       <div className="text">
         <ul>
           <li>
-            Minecraft Java Edition
-            でログインして下さい。バージョンは最新のものをお勧めしますが、古いバージョンでもログインは可能です。
-          </li>
-          <li>サーバーのアドレスは public.giji34.world です。</li>
-          <li>
             サーバーはホワイトリスト制となっています。お手数ですがログイン前に、管理者{" "}
             <a href="https://twitter.com/kbinani">@kbinani</a> 宛に Minecraft
             のプレイヤー名を DM でお伝え下さい。
+          </li>
+          <li>
+            Java 版
+            <ul>
+              <li>
+                バージョンは最新のものをお勧めしますが、1.9.x
+                以上のバージョンであればログインは可能です。
+              </li>
+              <li>サーバーのアドレスは public.giji34.world です。</li>
+            </ul>
+          </li>
+          <li>
+            統合版
+            <ul>
+              <li>
+                サーバーのアドレスは public.giji34.world です。ポート番号は
+                19132 です。
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
