@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
+import { ServerEdition } from "../share/types";
 
 export const CaveatMessage: FC = ({}) => {
   const lines = [
@@ -22,48 +23,93 @@ export const CaveatMessage: FC = ({}) => {
   );
 };
 
-export const HowToLoginMessage: FC = ({}) => {
+export const SelectEditionMessage: FC<{
+  edition: ServerEdition | undefined;
+  onSelect: (edition: ServerEdition) => void;
+}> = ({ edition, onSelect }) => {
+  return (
+    <>
+      <h2>エディションについて</h2>
+      <div className="text">
+        <ul>
+          <li> 観光専用サーバーは Java 版、統合版を用意しています。</li>
+          <li>以下のボタンから参加したいエディションを選んで下さい。</li>
+        </ul>
+      </div>
+      <div style={{ display: "flex", marginBottom: 50 }}>
+        <EditionSelectButton
+          title={"Java 版"}
+          onClick={() => onSelect("java")}
+          selected={edition === "java"}
+        />
+        <EditionSelectButton
+          title={"統合版"}
+          onClick={() => onSelect("bedrock")}
+          selected={edition === "bedrock"}
+        />
+      </div>
+    </>
+  );
+};
+
+const EditionSelectButton: FC<{
+  title: string;
+  onClick: () => void;
+  selected: boolean;
+}> = ({ title, onClick, selected }) => {
+  return (
+    <div
+      className="edition-select-button"
+      data-selected={selected}
+      role={"button"}
+      onClick={onClick}
+    >
+      {title}
+    </div>
+  );
+};
+
+export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
+  edition,
+}) => {
+  const kJELines = [
+    "Java 版のバージョンは最新のものをお勧めします。1.9.x 以上のバージョンであればログインは可能です。",
+    "サーバーのアドレスは public.giji34.world です。",
+  ];
+  const kBELines = [
+    "サーバーのアドレスは public.giji34.world です。ポート番号は 19132 です。",
+    "にじ鯖・ホロ鯖再現ワールドのどちらか片方だけが稼働しています。下記のサーバー稼働状況を見て、ログインしたいサーバーが稼働している時にログインして下さい。",
+  ];
+  const lines = edition === "java" ? kJELines : kBELines;
   return (
     <>
       <h2>ログイン方法</h2>
       <div className="text">
         <ul>
           <li>
-            サーバーはホワイトリスト制となっています。お手数ですがログイン前に、管理者{" "}
+            サーバーはホワイトリスト制となっています。お手数ですがログイン前に、管理者
             <a href="https://twitter.com/kbinani">@kbinani</a> 宛に Minecraft
             のプレイヤー名を DM でお伝え下さい。
           </li>
-          <li>
-            Java 版
-            <ul>
-              <li>
-                バージョンは最新のものをお勧めしますが、1.9.x
-                以上のバージョンであればログインは可能です。
-              </li>
-              <li>サーバーのアドレスは public.giji34.world です。</li>
-            </ul>
-          </li>
-          <li>
-            統合版
-            <ul>
-              <li>
-                サーバーのアドレスは public.giji34.world です。ポート番号は
-                19132 です。
-              </li>
-            </ul>
-          </li>
+          {lines.map((l, i) => (
+            <li key={i}>{l}</li>
+          ))}
         </ul>
       </div>
     </>
   );
 };
 
-export const InstructionMessage: FC = ({}) => {
-  const lines = [
-    "ゲームモードはアドベンチャーモードになっています。",
+export const InstructionMessage: FC<{ edition: ServerEdition }> = ({
+  edition,
+}) => {
+  const baseLines = ["ゲームモードはアドベンチャーモードになっています。"];
+  const jeLines = [
     "ログインするとロビーにスポーンします。ロビーに設置されたネザーゲートから再現ワールドに入って下さい。",
     "サーバーからログアウトして再接続すると、最初のロビーに戻されます。地形にハマった、などトラブルの際、管理人が不在の場合は再接続をお試し下さい。",
   ];
+  const beLines = ["難易度はピースフルになっています。"];
+  const lines = [...baseLines, ...(edition === "java" ? jeLines : beLines)];
   return (
     <>
       <h2>サーバー内についてのご案内</h2>

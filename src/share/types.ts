@@ -20,3 +20,5 @@ export type ServerStatus = {
   status: Status;
   bedrock: boolean;
 };
+
+export type ServerEdition = "java" | "bedrock";
