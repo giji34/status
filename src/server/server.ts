@@ -22,6 +22,16 @@ monitor.start();
 
 const app = express();
 app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "kit.fontawesome.com"],
+      styleSrc: ["'self'", "kit-free.fontawesome.com"],
+      fontSrc: ["'self'", "kit-free.fontawesome.com"],
+    },
+  })
+);
 app.use(express.static("public"));
 app.get("/health_check", (req: Request, res: Response) => {
   res.status(200);
