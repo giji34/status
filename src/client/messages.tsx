@@ -74,18 +74,48 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
 }) => {
   const kJELines = [
     "Java 版のバージョンは最新のものをお勧めします。1.9.x 以上のバージョンであればログインは可能です。",
-    "サーバーのアドレスは public.giji34.world です。",
   ];
   const kBELines = [
-    "サーバーのアドレスは public.giji34.world です。ポート番号は 19132 です。",
     "にじ鯖・ホロ鯖再現ワールドのどちらか片方だけが稼働しています。下記のサーバー稼働状況を見て、ログインしたいサーバーが稼働している時にログインして下さい。",
   ];
   const lines = edition === "java" ? kJELines : kBELines;
+  const copyToClipboard = (s: string) => {
+    return () => {
+      navigator.clipboard.writeText(s);
+    };
+  };
+  const host = "public.giji34.world";
+  const port = "19132";
   return (
     <>
       <h2>ログイン方法</h2>
       <div className="text">
         <ul>
+          {edition === "java" && (
+            <li>
+              サーバーアドレスは
+              <i
+                className="fas fa-clipboard copyable"
+                onClick={copyToClipboard(host)}
+              />
+              <span className="pre">{host}</span>です。
+            </li>
+          )}
+          {edition === "bedrock" && (
+            <li>
+              サーバーアドレスは
+              <i
+                className="fas fa-clipboard copyable"
+                onClick={copyToClipboard(host)}
+              />
+              <span className="pre">{host}</span>です。ポートは
+              <li
+                className="fas fa-clipboard copyable"
+                onClick={copyToClipboard(port)}
+              />
+              <span className="pre">{port}</span>です。
+            </li>
+          )}
           <li>
             サーバーはホワイトリスト制となっています。お手数ですがログイン前に、管理者
             <a href="https://twitter.com/kbinani">@kbinani</a> 宛に Minecraft

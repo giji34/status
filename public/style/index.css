@@ -135,3 +135,13 @@ h2 {
   background-color: #1074e7;
   color: white;
 }
+
+.pre {
+  font-family: monospace;
+  margin-right: 5px;
+}
+
+.copyable {
+  margin: 0 5px;
+  cursor: pointer;
+}
