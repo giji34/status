@@ -72,13 +72,17 @@ const EditionSelectButton: FC<{
 export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
   edition,
 }) => {
-  const kJELines = [
+  const kJETailLines = [
     "Java 版のバージョンは最新のものをお勧めします。1.9.x 以上のバージョンであればログインは可能です。",
   ];
-  const kBELines = [
+  const kBEHeadLines = [
+    "Nintendo Switch からはログインできません。ご注意ください。",
+  ];
+  const kBETailLines = [
     "にじ鯖・ホロ鯖再現ワールドのどちらか片方だけが稼働しています。下記のサーバー稼働状況を見て、ログインしたいサーバーが稼働している時にログインして下さい。",
   ];
-  const lines = edition === "java" ? kJELines : kBELines;
+  const headLines = edition === "java" ? [] : kBEHeadLines;
+  const tailLines = edition === "java" ? kJETailLines : kBETailLines;
   const host = "public.giji34.world";
   const port = "19132";
   return (
@@ -86,6 +90,11 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
       <h2>ログイン方法</h2>
       <div className="text">
         <ul>
+          {headLines.map((l, i) => (
+            <li key={i}>
+              <span className="warning">{l}</span>
+            </li>
+          ))}
           {edition === "java" && (
             <li>
               サーバーアドレスは
@@ -110,7 +119,7 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
               <li>にじ鯖再現・ホロ鯖再現のどちらを観光したいか</li>
             </ul>
           </li>
-          {lines.map((l, i) => (
+          {tailLines.map((l, i) => (
             <li key={i}>{l}</li>
           ))}
         </ul>
