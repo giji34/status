@@ -32,7 +32,7 @@ export const SelectEditionMessage: FC<{
       <h2>エディションについて</h2>
       <div className="text">
         <ul>
-          <li> 観光専用サーバーは Java 版、統合版を用意しています。</li>
+          <li>観光専用サーバーは Java 版、統合版を用意しています。</li>
           <li>以下のボタンから参加したいエディションを選んで下さい。</li>
         </ul>
       </div>
@@ -100,9 +100,15 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
             </li>
           )}
           <li>
-            サーバーはホワイトリスト制となっています。お手数ですがログイン前に、管理者
-            <a href="https://twitter.com/kbinani">@kbinani</a> 宛に Minecraft
-            のプレイヤー名を DM でお伝え下さい。
+            サーバーはホワイトリスト制となっています。お手数ですがログイン前に、以下の
+            3 つの項目を管理者&nbsp;
+            <a href="https://twitter.com/kbinani">@kbinani</a>&nbsp;宛に Twitter
+            の DM でお伝え下さい。
+            <ul>
+              <li>Minecraft のプレイヤー名</li>
+              <li>Java 版・統合版のどちらを観光したいか</li>
+              <li>にじ鯖再現・ホロ鯖再現のどちらを観光したいか</li>
+            </ul>
           </li>
           {lines.map((l, i) => (
             <li key={i}>{l}</li>
