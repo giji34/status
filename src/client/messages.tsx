@@ -79,11 +79,6 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
     "にじ鯖・ホロ鯖再現ワールドのどちらか片方だけが稼働しています。下記のサーバー稼働状況を見て、ログインしたいサーバーが稼働している時にログインして下さい。",
   ];
   const lines = edition === "java" ? kJELines : kBELines;
-  const copyToClipboard = (s: string) => {
-    return () => {
-      navigator.clipboard.writeText(s);
-    };
-  };
   const host = "public.giji34.world";
   const port = "19132";
   return (
@@ -94,25 +89,13 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
           {edition === "java" && (
             <li>
               サーバーアドレスは
-              <i
-                className="fas fa-clipboard copyable"
-                onClick={copyToClipboard(host)}
-              />
               <span className="pre">{host}</span>です。
             </li>
           )}
           {edition === "bedrock" && (
             <li>
               サーバーアドレスは
-              <i
-                className="fas fa-clipboard copyable"
-                onClick={copyToClipboard(host)}
-              />
               <span className="pre">{host}</span>です。ポートは
-              <li
-                className="fas fa-clipboard copyable"
-                onClick={copyToClipboard(port)}
-              />
               <span className="pre">{port}</span>です。
             </li>
           )}

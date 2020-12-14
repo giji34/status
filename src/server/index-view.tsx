@@ -15,14 +15,10 @@ export const IndexView: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
         <title>{kTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href={"/style/index.css"} />
-        <script
-          src="https://kit.fontawesome.com/762151aa13.js"
-          crossOrigin="anonymous"
-        ></script>
         <script id="init" data-json={data}></script>
       </head>
       <body>
-        <div id="main"></div>
+        <div id="main" />
         <script src="/js/vendor.js"></script>
         <script src="/js/index.js"></script>
       </body>

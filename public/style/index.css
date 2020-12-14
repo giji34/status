@@ -139,9 +139,5 @@ h2 {
 .pre {
   font-family: monospace;
   margin-right: 5px;
-}
-
-.copyable {
-  margin: 0 5px;
-  cursor: pointer;
+  margin-left: 5px;
 }

@@ -26,10 +26,6 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "kit.fontawesome.com"],
-      "script-src-elem": ["'self'", "kit.fontawesome.com"],
-      styleSrc: ["'self'", "kit-free.fontawesome.com"],
-      fontSrc: ["'self'", "kit-free.fontawesome.com"],
     },
   })
 );
