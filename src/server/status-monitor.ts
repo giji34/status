@@ -46,13 +46,18 @@ export class StatusMonitor {
     for (const server of this.servers) {
       const { address, queryPort, name, bedrock } = server;
       if (bedrock) {
-        mcpeping(address, queryPort, (err, res) => {
-          if (err) {
-            this.updateStatus(name, bedrock, Status.DOWN);
-          } else {
-            this.updateStatus(name, bedrock, Status.UP);
-          }
-        });
+        try {
+          mcpeping(address, queryPort, (err, res) => {
+            if (err) {
+              this.updateStatus(name, bedrock, Status.DOWN);
+            } else {
+              this.updateStatus(name, bedrock, Status.UP);
+            }
+          });
+        } catch (e) {
+          console.error(e);
+          this.updateStatus(name, bedrock, Status.DOWN);
+        }
       } else {
         const query = new Query(address, queryPort, { timeout: 3000 });
         const onSuccess = () => {
