@@ -64,6 +64,7 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
           />
         )}
       </div>
+      <hr style={{ opacity: 0 }} />
     </>
   );
 };
