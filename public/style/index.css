@@ -111,10 +111,10 @@ h2 {
 }
 
 .edition-select-button {
-  color: #1074e7;
+  color: #2f60a3;
   height: 80px;
   font-size: 2em;
-  border: 1px solid #1074e7;
+  border: 1px solid #2f60a3;
   border-radius: 5px;
   line-height: 80px;
   flex-grow: 1;
@@ -127,12 +127,12 @@ h2 {
 
 .edition-select-button[data-selected="true"] {
   pointer-events: none;
-  background-color: #1074e7;
+  background-color: #2f60a3;
   color: white;
 }
 
 .edition-select-button[data-selected="false"]:active {
-  background-color: #1074e7;
+  background-color: #2f60a3;
   color: white;
 }
 
