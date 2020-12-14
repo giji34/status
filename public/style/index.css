@@ -17,7 +17,6 @@ body {
   background-color: #2f60a3;
   border-color: transparent;
   border-radius: 0;
-  height: 77px;
 }
 
 .navbar-header {
@@ -29,6 +28,7 @@ body {
   font-size: 30px;
   color: #ddd;
   font-weight: bold;
+  line-height: 30px;
 }
 
 .main {
