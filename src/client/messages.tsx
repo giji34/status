@@ -73,7 +73,8 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
   edition,
 }) => {
   const kJETailLines = [
-    "Java 版のバージョンは最新のものをお勧めします。1.9.x 以上のバージョンであればログインは可能です。",
+    "Java 版のバージョンは最新のものをお使いください。",
+    "Fabric や Forge 等の mod loader をお使いの場合、接続できない場合があります。",
   ];
   const kBEHeadLines = [
     "Nintendo Switch からはログインできません。ご注意ください。",
