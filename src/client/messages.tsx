@@ -80,7 +80,7 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
     "Nintendo Switch からはログインできません。ご注意ください。",
   ];
   const kBETailLines = [
-    "にじ鯖・ホロ鯖再現ワールドのどちらか片方だけが稼働しています。下記のサーバー稼働状況を見て、ログインしたいサーバーが稼働している時にログインして下さい。",
+    "にじ鯖・ホロ鯖・旧ホロ鯖再現ワールドのどれか一つだけが稼働しています。下記のサーバー稼働状況を見て、ログインしたいサーバーが稼働している時にログインして下さい。",
   ];
   const headLines = edition === "java" ? [] : kBEHeadLines;
   const tailLines = edition === "java" ? kJETailLines : kBETailLines;
@@ -117,7 +117,7 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
             <ul>
               <li>Minecraft のプレイヤー名</li>
               <li>Java 版・統合版のどちらを観光したいか</li>
-              <li>にじ鯖再現・ホロ鯖再現のどちらを観光したいか</li>
+              <li>にじ鯖再現・ホロ鯖・旧ホロ鯖再現のどれを観光したいか</li>
             </ul>
           </li>
           {tailLines.map((l, i) => (
