@@ -1,4 +1,4 @@
-import { Server, ServerStatus, Status } from "../share/types";
+import { Server, ServerName, ServerStatus, Status } from "../share/types";
 import * as Query from "mcquery";
 import mcpeping = require("mcpe-ping");
 
@@ -12,7 +12,7 @@ export class StatusMonitor {
     const { servers, interval } = params;
     this.servers = servers;
     this._current = servers.map((server) => ({
-      server: server.name,
+      name: server.name,
       status: Status.UNKNOWN,
       bedrock: server.bedrock === true,
     }));
@@ -32,9 +32,9 @@ export class StatusMonitor {
     return [...this._current];
   }
 
-  private updateStatus(name: string, bedrock: boolean, status: Status) {
+  private updateStatus(name: ServerName, bedrock: boolean, status: Status) {
     const idx = this._current.findIndex(
-      (v) => v.server === name && v.bedrock === bedrock
+      (v) => v.name === name && v.bedrock === bedrock
     );
     if (idx < 0) {
       return;
