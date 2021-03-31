@@ -19,7 +19,6 @@ export const IndexView: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
       </head>
       <body>
         <div id="main" />
-        <script src="/js/vendor.js"></script>
         <script src="/js/index.js"></script>
       </body>
     </html>
