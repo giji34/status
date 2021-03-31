@@ -15,9 +15,9 @@ export type Server = {
 export function serverNameDisplayString(name: ServerName): string {
   switch (name) {
     case "2434 main":
-      return "にじ鯖(メインワールド) 再現";
+      return "にじ鯖再現 (メインワールド)";
     case "2434 world06":
-      return "にじ鯖(新規開拓ワールド) 再現";
+      return "にじ鯖再現 (新規開拓ワールド)";
     case "hololive_00":
       return "旧ホロ鯖 再現";
     case "hololive_01":
