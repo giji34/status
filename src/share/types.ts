@@ -10,6 +10,7 @@ export type Server = {
   address: string;
   queryPort: number;
   bedrock?: boolean;
+  disabled?: boolean;
 };
 
 export function serverNameDisplayString(name: ServerName): string {

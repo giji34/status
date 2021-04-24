@@ -44,7 +44,11 @@ export class StatusMonitor {
 
   private readonly update = () => {
     for (const server of this.servers) {
-      const { address, queryPort, name, bedrock } = server;
+      const { address, queryPort, name, bedrock, disabled } = server;
+      if (disabled === true) {
+        this.updateStatus(name, bedrock === true, Status.DOWN);
+        continue;
+      }
       if (bedrock) {
         try {
           mcpeping(address, queryPort, (err, res) => {
