@@ -9,6 +9,11 @@ import { Language } from "../share/i18n";
 export function createHydrationRoute(monitor: StatusMonitor): express.Router {
   const router = express.Router();
   router.get("/", (req, res, next) => {
+    console.log(
+      `[${new Date().toISOString()}] ${
+        req.connection.remoteAddress
+      } ${req.header("referer")}`
+    );
     const best = req.acceptsLanguages(["en", "ja"]);
     let language: Language = "en";
     if (best === "ja") {
