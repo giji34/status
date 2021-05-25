@@ -4,11 +4,21 @@ import * as express from "express";
 import { renderToNodeStream } from "react-dom/server";
 import { IndexView } from "./index-view";
 import { StatusMonitor } from "./status-monitor";
+import { Language } from "../share/i18n";
 
-export function createHydrationRoute(monitor: StatusMonitor): express.Route {
+export function createHydrationRoute(monitor: StatusMonitor): express.Router {
   const router = express.Router();
   router.get("/", (req, res, next) => {
-    renderTo(<IndexView statuses={monitor.current} />, res, next);
+    const best = req.acceptsLanguages(["en", "ja"]);
+    let language: Language = "en";
+    if (best === "ja") {
+      language = "jp";
+    }
+    renderTo(
+      <IndexView language={language} statuses={monitor.current} />,
+      res,
+      next
+    );
   });
   return router;
 }

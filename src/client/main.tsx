@@ -10,6 +10,7 @@ import {
 import { StatusContainer } from "./status-container";
 import { useDidMount, usePatchReducer } from "../share/hooks";
 import { kTitle } from "../server/index-view";
+import { Language, Translatable } from "../share/i18n";
 
 export const LanguageContext = React.createContext<{
   language: Language;
@@ -25,7 +26,10 @@ export function text(t: Translatable): string {
   return t[ctx.language];
 }
 
-export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
+export const Main: FC<{ statuses: ServerStatus[]; language: Language }> = ({
+  statuses,
+  language,
+}) => {
   const edition = getEditionFromQuery();
   const [state, setState] = usePatchReducer<State>({ statuses, edition });
   const fetchStatus = async () => {
@@ -46,50 +50,48 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
   const jeServers = state.statuses.filter((s) => !s.bedrock);
   const beServers = state.statuses.filter((s) => s.bedrock);
   return (
-    <LanguageContext.Provider value={{ language: "en" }}>
-      <>
-        <div className="navbar">
-          <div className="navbar-header center">
-            <div className="title">{kTitle}</div>
-            <div className="flex-spacer" />
-            <div className="language">
-              lang:
-              <select>
-                <option>JP</option>
-                <option>EN</option>
-              </select>
-            </div>
+    <LanguageContext.Provider value={{ language }}>
+      <div className="navbar">
+        <div className="navbar-header center">
+          <div className="title">{kTitle}</div>
+          <div className="flex-spacer" />
+          <div className="language">
+            lang:
+            <select>
+              <option>JP</option>
+              <option>EN</option>
+            </select>
           </div>
         </div>
-        <div className="main center">
-          <CaveatMessage />
-          <SelectEditionMessage
-            edition={state.edition}
-            onSelect={(edition) => setState({ edition })}
+      </div>
+      <div className="main center">
+        <CaveatMessage />
+        <SelectEditionMessage
+          edition={state.edition}
+          onSelect={(edition) => setState({ edition })}
+        />
+        {state.edition && <HowToLoginMessage edition={state.edition} />}
+        {state.edition && <InstructionMessage edition={state.edition} />}
+        {state.edition === "java" && jeServers.length > 0 && (
+          <StatusContainer
+            title={{
+              jp: "Java 版サーバー稼働状況",
+              en: "Server Availability (Java Edition)",
+            }}
+            statuses={jeServers}
           />
-          {state.edition && <HowToLoginMessage edition={state.edition} />}
-          {state.edition && <InstructionMessage edition={state.edition} />}
-          {state.edition === "java" && jeServers.length > 0 && (
-            <StatusContainer
-              title={{
-                jp: "Java 版サーバー稼働状況",
-                en: "Server Availability (Java Edition)",
-              }}
-              statuses={jeServers}
-            />
-          )}
-          {state.edition === "bedrock" && beServers.length > 0 && (
-            <StatusContainer
-              title={{
-                jp: "統合版サーバー稼働状況",
-                en: "Server Availability (Bedrock Edition)",
-              }}
-              statuses={beServers}
-            />
-          )}
-        </div>
-        <hr style={{ opacity: 0 }} />
-      </>
+        )}
+        {state.edition === "bedrock" && beServers.length > 0 && (
+          <StatusContainer
+            title={{
+              jp: "統合版サーバー稼働状況",
+              en: "Server Availability (Bedrock Edition)",
+            }}
+            statuses={beServers}
+          />
+        )}
+      </div>
+      <hr style={{ opacity: 0 }} />
     </LanguageContext.Provider>
   );
 };

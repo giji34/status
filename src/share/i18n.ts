@@ -1,6 +1,6 @@
-type Language = "jp" | "en";
+export type Language = "jp" | "en";
 
-interface Translatable {
+export interface Translatable {
   jp: string;
   en: string;
 }

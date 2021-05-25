@@ -2,6 +2,7 @@ import * as React from "react";
 import { FC, useContext, useMemo } from "react";
 import { ServerEdition } from "../share/types";
 import { LanguageContext, text } from "./main";
+import { Translatable } from "../share/i18n";
 
 export const CaveatMessage: FC = ({}) => {
   const lines: Translatable[] = [

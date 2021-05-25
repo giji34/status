@@ -3,6 +3,7 @@ import { FC } from "react";
 import { ServerName, ServerStatus, Status } from "../share/types";
 import classNames from "classnames";
 import { text } from "./main";
+import { Translatable } from "../share/i18n";
 
 export const StatusContainer: FC<{
   title: Translatable;
