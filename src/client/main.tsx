@@ -41,6 +41,14 @@ export const Main: FC<{ statuses: ServerStatus[] }> = ({ statuses }) => {
       <div className="navbar">
         <div className="navbar-header center">
           <div className="title">{kTitle}</div>
+          <div className="flex-spacer" />
+          <div className="language">
+            lang:
+            <select>
+              <option>JP</option>
+              <option>EN</option>
+            </select>
+          </div>
         </div>
       </div>
       <div className="main center">

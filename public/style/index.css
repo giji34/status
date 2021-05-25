@@ -22,6 +22,7 @@ body {
 .navbar-header {
   max-width: 1024px;
   padding: 24px 15px;
+  display: flex;
 }
 
 .navbar-header .title {
@@ -29,6 +30,23 @@ body {
   color: #ddd;
   font-weight: bold;
   line-height: 30px;
+}
+
+.navbar-header .language {
+  font-size: 16px;
+  color: #ddd;
+  line-height: 30px;
+}
+
+.navbar-header .language select {
+  color: #ddd;
+  background-color: #2f60a3;
+  font-size: 16px;
+  min-height: 30px;
+  min-width: 50px;
+  appearance: none;
+  padding: 5px 20px;
+  text-align: center;
 }
 
 .main {
@@ -144,4 +162,8 @@ h2 {
 
 .warning {
   color: red;
+}
+
+.flex-spacer {
+  flex-grow: 1;
 }
