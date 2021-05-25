@@ -45,7 +45,7 @@ export const Main: FC<{ statuses: ServerStatus[]; language: Language }> = ({
     };
   });
   useEffect(() => {
-    updateLocation(state.edition);
+    updateLocation(state.edition, language);
   }, [state.edition]);
   const jeServers = state.statuses.filter((s) => !s.bedrock);
   const beServers = state.statuses.filter((s) => s.bedrock);
@@ -53,7 +53,7 @@ export const Main: FC<{ statuses: ServerStatus[]; language: Language }> = ({
     <LanguageContext.Provider value={{ language }}>
       <div className="navbar">
         <div className="navbar-header center">
-          <div className="title">{kTitle}</div>
+          <div className="title">{text(kTitle)}</div>
           <div className="flex-spacer" />
           <div className="language">
             lang:
@@ -107,10 +107,17 @@ function getEditionFromQuery(): ServerEdition | undefined {
   }
 }
 
-function updateLocation(edition: ServerEdition | undefined) {
+function updateLocation(
+  edition: ServerEdition | undefined,
+  language: Language
+) {
   if (edition) {
-    window.history.replaceState(undefined, kTitle, `/?edition=${edition}`);
+    window.history.replaceState(
+      undefined,
+      kTitle[language],
+      `/?edition=${edition}`
+    );
   } else {
-    window.history.replaceState(undefined, kTitle, "/");
+    window.history.replaceState(undefined, kTitle[language], "/");
   }
 }
