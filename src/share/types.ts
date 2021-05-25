@@ -13,23 +13,6 @@ export type Server = {
   disabled?: boolean;
 };
 
-export function serverNameDisplayString(name: ServerName): string {
-  switch (name) {
-    case "2434 main":
-      return "にじ鯖 再現 (メインワールド)";
-    case "2434 world06":
-      return "にじ鯖 再現 (新規開拓ワールド)";
-    case "hololive_00":
-      return "旧ホロ鯖 再現";
-    case "hololive_01":
-      return "ホロ鯖 再現";
-    case "lobby":
-      return "ロビー";
-    default:
-      return "(不明)";
-  }
-}
-
 export type Settings = {
   servers: Server[];
 };
