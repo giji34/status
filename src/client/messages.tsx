@@ -10,7 +10,7 @@ export const CaveatMessage: FC = ({}) => {
       jp:
         "観光の様子を配信、動画に撮影、または録音することは禁止とさせていただきます。",
       en:
-        "Streaming, filming, or sound recording of the sightseeing is prohibited.",
+        "Streaming, filming, or sound recording of your sightseeing is prohibited.",
     },
     {
       jp:
@@ -28,7 +28,7 @@ export const CaveatMessage: FC = ({}) => {
       jp:
         "本プロジェクトの観光用サーバーから得られる地形データ等をファイル等に保存しないで下さい。",
       en:
-        "Please do not save the terrain data and other data obtained from the server of this project in any files.",
+        "Please do not save the terrain data and other data obtained from the server of this project in any format.",
     },
   ];
   return (
@@ -72,12 +72,12 @@ export const SelectEditionMessage: FC<{
       </div>
       <div style={{ display: "flex", marginBottom: 50 }}>
         <EditionSelectButton
-          title={text({ jp: "Java 版", en: "Java Edition" })}
+          title={text({ jp: "Java 版", en: "Java" })}
           onClick={() => onSelect("java")}
           selected={edition === "java"}
         />
         <EditionSelectButton
-          title={text({ jp: "統合版", en: "Bedrock Edition" })}
+          title={text({ jp: "統合版", en: "Bedrock" })}
           onClick={() => onSelect("bedrock")}
           selected={edition === "bedrock"}
         />
@@ -135,44 +135,11 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
   const headLines: Translatable[] = edition === "java" ? [] : kBEHeadLines;
   const tailLines: Translatable[] =
     edition === "java" ? kJETailLines : kBETailLines;
-  const host = "public.giji34.world";
-  const port = "19132";
   return (
     <>
-      <h2>{text({ jp: "ログイン方法", en: "How to Login" })}</h2>
+      <h2>{text({ jp: "応募方法", en: "How to apply" })}</h2>
       <div className="text">
         <ul>
-          {headLines.map((l, i) => (
-            <li key={i}>
-              <span className="warning">{text(l)}</span>
-            </li>
-          ))}
-          {edition === "java" && (
-            <li>
-              <DecorateMonospace
-                t={text({
-                  jp: `サーバーアドレスは<pre>${host}</pre>です。`,
-                  en: `The server address is <pre>${host}</pre>.`,
-                })}
-              />
-            </li>
-          )}
-          {edition === "bedrock" && (
-            <li>
-              <DecorateMonospace
-                t={text({
-                  jp: `サーバーアドレスは<pre>${host}</pre>です。`,
-                  en: `The server address is <pre>${host}</pre>.`,
-                })}
-              />
-              <DecorateMonospace
-                t={text({
-                  jp: `ポートは<pre>${port}</pre>です。`,
-                  en: `The port number is <pre>${port}</pre>.`,
-                })}
-              />
-            </li>
-          )}
           <li>
             <DMInstruction />
             <ul>
@@ -200,6 +167,11 @@ export const HowToLoginMessage: FC<{ edition: ServerEdition }> = ({
           </li>
           {tailLines.map((l, i) => (
             <li key={i}>{text(l)}</li>
+          ))}
+          {headLines.map((l, i) => (
+            <li key={i}>
+              <span className="warning">{text(l)}</span>
+            </li>
           ))}
         </ul>
       </div>
@@ -232,13 +204,11 @@ const DMInstruction: FC = () => {
 export const InstructionMessage: FC<{ edition: ServerEdition }> = ({
   edition,
 }) => {
-  const baseLines: Translatable[] = [
+  const jeLines: Translatable[] = [
     {
       jp: "ゲームモードはアドベンチャーモードになっています。",
       en: "The game mode is set to Adventure mode.",
     },
-  ];
-  const jeLines: Translatable[] = [
     {
       jp:
         "ログインするとロビーにスポーンします。ロビーに設置されたネザーゲートから観光用ワールドに入って下さい。",
@@ -258,17 +228,45 @@ export const InstructionMessage: FC<{ edition: ServerEdition }> = ({
       en: "The game mode is set to Peaceful mode.",
     },
   ];
-  const lines = [...baseLines, ...(edition === "java" ? jeLines : beLines)];
+  const lines = edition === "java" ? jeLines : beLines;
+  const host = "public.giji34.world";
+  const port = "19132";
   return (
     <>
       <h2>
         {text({
-          jp: "サーバー内についてのご案内",
+          jp: "サーバーについてのご案内",
           en: "Information on the server",
         })}
       </h2>
       <div className="text">
         <ul>
+          {edition === "java" && (
+            <li>
+              <DecorateMonospace
+                t={text({
+                  jp: `サーバーアドレスは<pre>${host}</pre>です。`,
+                  en: `The server address is <pre>${host}</pre>.`,
+                })}
+              />
+            </li>
+          )}
+          {edition === "bedrock" && (
+            <li>
+              <DecorateMonospace
+                t={text({
+                  jp: `サーバーアドレスは<pre>${host}</pre>です。`,
+                  en: `The server address is <pre>${host}</pre>.`,
+                })}
+              />
+              <DecorateMonospace
+                t={text({
+                  jp: `ポートは<pre>${port}</pre>です。`,
+                  en: `The port number is <pre>${port}</pre>.`,
+                })}
+              />
+            </li>
+          )}
           {lines.map((l, i) => (
             <li key={i}>{text(l)}</li>
           ))}
