@@ -19,6 +19,7 @@ export const LanguageContext = React.createContext<{
 type State = {
   statuses: ServerStatus[];
   edition?: ServerEdition;
+  language: Language;
 };
 
 export function text(t: Translatable): string {
@@ -31,7 +32,11 @@ export const Main: FC<{ statuses: ServerStatus[]; language: Language }> = ({
   language,
 }) => {
   const edition = getEditionFromQuery();
-  const [state, setState] = usePatchReducer<State>({ statuses, edition });
+  const [state, setState] = usePatchReducer<State>({
+    statuses,
+    edition,
+    language,
+  });
   const fetchStatus = async () => {
     const res = await fetch("/status", { method: "GET" });
     const json: { servers: ServerStatus[] } = await res.json();
@@ -49,15 +54,26 @@ export const Main: FC<{ statuses: ServerStatus[]; language: Language }> = ({
   }, [state.edition]);
   const jeServers = state.statuses.filter((s) => !s.bedrock);
   const beServers = state.statuses.filter((s) => s.bedrock);
+  const onChangeLanguage = (element) => {
+    const value = element.target.value;
+    switch (value) {
+      case "JP":
+        setState({ language: "jp" });
+        break;
+      case "EN":
+        setState({ language: "en" });
+        break;
+    }
+  };
   return (
-    <LanguageContext.Provider value={{ language }}>
+    <LanguageContext.Provider value={{ language: state.language }}>
       <div className="navbar">
         <div className="navbar-header center">
-          <div className="title">{text(kTitle)}</div>
+          <div className="title">{kTitle[state.language]}</div>
           <div className="flex-spacer" />
           <div className="language">
             lang:
-            <select>
+            <select onChange={onChangeLanguage}>
               <option>JP</option>
               <option>EN</option>
             </select>
